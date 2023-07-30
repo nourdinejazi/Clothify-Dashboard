@@ -38,6 +38,11 @@ const MainNav = () => {
             label : 'Products',
             active : pathname===`/products`
         },
+        {
+            href : `/orders`,
+            label : 'Orders',
+            active : pathname===`/orders`
+        },
     ]
 
     return ( 
