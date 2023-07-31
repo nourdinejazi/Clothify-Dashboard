@@ -11,7 +11,7 @@ export async function POST(
 
     const body = await req.json();
 
-    const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
+    const { name, gender , price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
@@ -40,6 +40,10 @@ export async function POST(
     if (!sizeId) {
       return new NextResponse("Size id is required", { status: 400 });
     }
+    if (!gender) {
+      return new NextResponse("Gender  is required", { status: 400 });
+    }
+
 
 
     const product = await prismadb.product.create({
@@ -50,6 +54,7 @@ export async function POST(
         isArchived,
         categoryId,
         colorId,
+        gender,
         sizeId,
         images: {
           createMany: {
@@ -74,6 +79,7 @@ export async function GET(
   try {
     const { searchParams } = new URL(req.url)
     const categoryId = searchParams.get('categoryId') || undefined;
+    const gender = searchParams.get('gender') || undefined;
     const colorId = searchParams.get('colorId') || undefined;
     const sizeId = searchParams.get('sizeId') || undefined;
     const isFeatured = searchParams.get('isFeatured');
@@ -83,6 +89,7 @@ export async function GET(
     const products = await prismadb.product.findMany({
       where: {
         categoryId,
+        gender,
         colorId,
         sizeId,
         isFeatured: isFeatured ? true : undefined,
