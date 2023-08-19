@@ -4,17 +4,16 @@ import { auth } from '@clerk/nextjs';
 import prismadb from '@/lib/prismadb';
  
 export async function POST(
-  req: Request,
-  { params }: { params: { storeId: string } }
+  req: Request
 ) {
   try {
     const { userId } = auth();
-
+    
     const body = await req.json();
 
     const { label, imageUrl } = body;
 
-    if (!userId) {
+    if (userId !== process.env.ADMIN) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 

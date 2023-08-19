@@ -13,6 +13,8 @@ interface billboardClientProps {
     data  : BillboardColumn []
 }
 
+
+
 const BillboardClient : React.FC<billboardClientProps> = ({data}) => {
 
     const router = useRouter()

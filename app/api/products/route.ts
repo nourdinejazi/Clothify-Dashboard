@@ -13,7 +13,7 @@ export async function POST(
 
     const { name, gender , price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
-    if (!userId) {
+    if (userId !== process.env.ADMIN) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 

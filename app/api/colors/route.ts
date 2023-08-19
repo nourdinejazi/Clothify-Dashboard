@@ -13,7 +13,7 @@ export async function POST(
 
     const { name, value } = body;
 
-    if (!userId) {
+    if (userId !== process.env.ADMIN) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 

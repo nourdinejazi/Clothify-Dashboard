@@ -11,9 +11,10 @@ export async function POST (
 
         const body = await req.json()
         const {name} = body
-        if (!userId){
-            return new NextResponse("Unauthenticated" , {status : 403})
-        }
+
+        if (userId !== process.env.ADMIN) {
+            return new NextResponse("Unauthenticated", { status: 403 });
+          }
 
         if (!name){
             return new NextResponse("Name is required" , {status : 400})

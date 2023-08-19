@@ -2,7 +2,6 @@ import BillboardClient from "./components/client"
 import prismadb from "@/lib/prismadb";
 import { BillboardColumn } from "./components/columns";
 import {format} from "date-fns"
-
 const Billboards =async () => {
 
     const billboards= await prismadb.billboard.findMany({

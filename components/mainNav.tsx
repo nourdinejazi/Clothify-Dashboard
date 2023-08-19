@@ -8,11 +8,7 @@ const MainNav = () => {
 
     const pathname =usePathname()
     const routes = [
-        {
-            href : `/`,
-            label : 'Overview',
-            active : pathname===`/`
-        },
+
         {
             href : `/billboards`,
             label : 'Billboards',

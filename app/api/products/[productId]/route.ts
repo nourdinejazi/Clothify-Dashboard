@@ -38,7 +38,7 @@ export async function DELETE(
   try {
     const { userId } = auth();
 
-    if (!userId) {
+    if (userId !== process.env.ADMIN) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 
@@ -72,7 +72,7 @@ export async function PATCH(
 
     const { name, price, gender , categoryId, images, colorId, sizeId, isFeatured, isArchived } = body;
 
-    if (!userId) {
+    if (userId !== process.env.ADMIN) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
 

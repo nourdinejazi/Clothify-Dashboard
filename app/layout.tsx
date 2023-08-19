@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={poppins.className }>
       {children}
       <Toaster />
       </body>
