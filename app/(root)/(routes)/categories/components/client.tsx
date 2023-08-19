@@ -29,7 +29,7 @@ const CategoriesClient : React.FC<CategoriesClientProps> = ({
             <div className="flex items-center justify-center">
                 <Heading title={`Categories(${data.length})`}  description="Manager Categories for your store" />
                 <Button
-                    className="ml-auto rounded focus:ring "
+                    className="ml-auto  focus:ring "
                     onClick={()=>
                         router.push("/categories/new")
                     }
