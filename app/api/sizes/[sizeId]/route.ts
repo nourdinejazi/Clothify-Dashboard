@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export async function GET(
   req: Request,
@@ -14,16 +14,16 @@ export async function GET(
 
     const size = await prismadb.size.findUnique({
       where: {
-        id: params.sizeId
-      }
+        id: params.sizeId,
+      },
     });
-  
+
     return NextResponse.json(size);
   } catch (error) {
-    console.log('[SIZE_GET]', error);
+    console.log("[SIZE_GET]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
 
 export async function DELETE(
   req: Request,
@@ -40,21 +40,18 @@ export async function DELETE(
       return new NextResponse("Size id is required", { status: 400 });
     }
 
-
-
     const size = await prismadb.size.delete({
       where: {
-        id: params.sizeId
-      }
+        id: params.sizeId,
+      },
     });
-  
+
     return NextResponse.json(size);
   } catch (error) {
-    console.log('[SIZE_DELETE]', error);
+    console.log("[SIZE_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
-
+}
 
 export async function PATCH(
   req: Request,
@@ -79,27 +76,23 @@ export async function PATCH(
       return new NextResponse("Value is required", { status: 400 });
     }
 
-
     if (!params.sizeId) {
       return new NextResponse("Size id is required", { status: 400 });
     }
 
-
-
-
     const size = await prismadb.size.update({
       where: {
-        id: params.sizeId
+        id: params.sizeId,
       },
       data: {
         name,
-        value
-      }
+        value,
+      },
     });
-  
+
     return NextResponse.json(size);
   } catch (error) {
-    console.log('[SIZE_PATCH]', error);
+    console.log("[SIZE_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}

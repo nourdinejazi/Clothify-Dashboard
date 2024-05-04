@@ -1,11 +1,8 @@
-import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs';
+import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import prismadb from "@/lib/prismadb";
 
-import prismadb from '@/lib/prismadb';
- 
-export async function POST(
-  req: Request,
-) {
+export async function POST(req: Request) {
   try {
     const { userId } = auth();
 
@@ -25,30 +22,27 @@ export async function POST(
       return new NextResponse("Value is required", { status: 400 });
     }
 
-
     const size = await prismadb.size.create({
       data: {
         name,
         value,
-      }
+      },
     });
-  
+
     return NextResponse.json(size);
   } catch (error) {
-    console.log('[SIZES_POST]', error);
+    console.log("[SIZES_POST]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
 
-export async function GET(
-  req: Request,
-) {
+export async function GET(req: Request) {
   try {
     const sizes = await prismadb.size.findMany();
 
     return NextResponse.json(sizes);
   } catch (error) {
-    console.log('[SIZES_GET]', error);
+    console.log("[SIZES_GET]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}

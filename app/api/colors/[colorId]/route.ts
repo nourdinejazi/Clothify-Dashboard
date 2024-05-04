@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 import prismadb from "@/lib/prismadb";
 
@@ -14,16 +14,16 @@ export async function GET(
 
     const color = await prismadb.color.findUnique({
       where: {
-        id: params.colorId
-      }
+        id: params.colorId,
+      },
     });
-  
+
     return NextResponse.json(color);
   } catch (error) {
-    console.log('[COLOR_GET]', error);
+    console.log("[COLOR_GET]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
 
 export async function DELETE(
   req: Request,
@@ -40,20 +40,18 @@ export async function DELETE(
       return new NextResponse("Color id is required", { status: 400 });
     }
 
-
     const color = await prismadb.color.delete({
       where: {
-        id: params.colorId
-      }
+        id: params.colorId,
+      },
     });
-  
+
     return NextResponse.json(color);
   } catch (error) {
-    console.log('[COLOR_DELETE]', error);
+    console.log("[COLOR_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
-
+}
 
 export async function PATCH(
   req: Request,
@@ -78,25 +76,23 @@ export async function PATCH(
       return new NextResponse("Value is required", { status: 400 });
     }
 
-
     if (!params.colorId) {
       return new NextResponse("Color id is required", { status: 400 });
     }
 
-
     const color = await prismadb.color.update({
       where: {
-        id: params.colorId
+        id: params.colorId,
       },
       data: {
         name,
-        value
-      }
+        value,
+      },
     });
-  
+
     return NextResponse.json(color);
   } catch (error) {
-    console.log('[COLOR_PATCH]', error);
+    console.log("[COLOR_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
-};
+}
