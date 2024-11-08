@@ -23,3 +23,21 @@ Follow these steps to get your project up and running.
 ```bash
 git clone https://github.com/yourusername/your-dashboard.git
 cd your-dashboard
+npm install
+# or
+yarn install
+
+# Environment Variables
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=
+
+ADMIN=
+
+DATABASE_URL=
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+
